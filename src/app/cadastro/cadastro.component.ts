@@ -3,6 +3,7 @@ import { FotoComponent } from '../foto/foto.component';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FotoService } from '../servicos/foto.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MensagemComponent } from '../mensagem/mensagem.component';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CadastroComponent implements OnInit {
   
   foto = new FotoComponent();
+  mensagem = new MensagemComponent();
 
   constructor(  private service: FotoService, 
                 private rota: ActivatedRoute,
@@ -39,18 +41,30 @@ export class CadastroComponent implements OnInit {
       this.service
             .alterar(this.foto)
             .subscribe(
-              response => {
-                this.router.navigate(['']);
+              response => { 
+                this.mensagem.textoMsg = `Foto ${this.foto.titulo} salva com sucesso!!!`;
+                this.mensagem.tipo='success';
+                setTimeout(() => {
+                  this.router.navigate(['']);
+                }, 2000);
               },
-              responseError => console.error(responseError)
+              erro => {
+                this.mensagem.textoMsg = `Ocorreu um erro ao salvar a foto ${this.foto.titulo}`;
+                this.mensagem.tipo='danger';
+              }
             );
     } else{
       this.service.cadastrar(this.foto)
       .subscribe(
-        response => {
-            this.foto = new FotoComponent(); 
-          },
-          erro => console.error("Erro")
+        response => { 
+          this.mensagem.textoMsg = `Foto ${this.foto.titulo} salva com sucesso!!!`;
+          this.mensagem.tipo='success';
+          this.foto = new FotoComponent();
+        },
+        erro => {
+          this.mensagem.textoMsg = `Ocorreu um erro ao salvar a foto ${this.foto.titulo}`;
+          this.mensagem.tipo='danger';
+        }
       );
     }
 

@@ -11,13 +11,15 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ModuloRoteador } from "./app.routes";
 import { Error404Component } from './error404/error404.component';
 import { FotoService } from './servicos/foto.service';
+import { MensagemComponent } from './mensagem/mensagem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListagemComponent,
     CadastroComponent,
-    Error404Component
+    Error404Component,
+    MensagemComponent
   ],
   imports: [
     BrowserModule,
