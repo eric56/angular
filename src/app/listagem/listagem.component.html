@@ -1,0 +1,22 @@
+<header class="jumbotron">
+    <h1 class="text-center">CaelumPic</h1>
+</header>
+
+<section class="container">
+
+    <div class="row">
+        <form class="col-md-12">
+                <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+        </form>
+    </div>
+
+    <div class="row">
+        <painel *ngFor="let picture of listPictures" tituloPainel={{picture.titulo}} class="col-md-4">
+                <a [routerLink]="['/cadastro', picture._id]" data-foto>
+                    <foto url="{{picture.url}}" titulo = "{{picture.titulo}}"> </foto>
+                </a>
+                <button (click)="remover(picture)" class="btn btn-danger">Apagar</button>
+            </painel>
+    </div>
+      
+</section>
