@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FotoService } from '../servicos/foto.service';
 import { FotoComponent } from '../foto/foto.component';
 import { ModuloRoteador } from '../app.routes';
+import { MensagemComponent } from '../mensagem/mensagem.component';
 
 @Component({
   selector: 'app-listagem',
@@ -12,6 +13,7 @@ import { ModuloRoteador } from '../app.routes';
 export class ListagemComponent implements OnInit {
 
   listPictures: FotoComponent[] = [];
+  mensagem = new MensagemComponent();
 
   constructor(private serviceFoto: FotoService){
 
@@ -27,7 +29,8 @@ export class ListagemComponent implements OnInit {
   remover(foto: FotoComponent){
     this.serviceFoto
       .deletar(foto)
-      .subscribe(response => {
+      .subscribe(mensagemApi => {
+        this.mensagem = mensagemApi;
         this.listPictures = this.listPictures.filter(pictureDeleted => pictureDeleted != foto);
       },
       responseError => console.error(responseError)

@@ -41,28 +41,27 @@ export class CadastroComponent implements OnInit {
       this.service
             .alterar(this.foto)
             .subscribe(
-              response => { 
-                this.mensagem.textoMsg = `Foto ${this.foto.titulo} salva com sucesso!!!`;
-                this.mensagem.tipo='success';
+              mensagemApi => { 
+                this.mensagem = mensagemApi;
+                this.foto = new FotoComponent();
                 setTimeout(() => {
                   this.router.navigate(['']);
                 }, 2000);
               },
               erro => {
-                this.mensagem.textoMsg = `Ocorreu um erro ao salvar a foto ${this.foto.titulo}`;
+                this.mensagem.textoMsg = `Ocorreu um erro ${erro}`;
                 this.mensagem.tipo='danger';
               }
             );
     } else{
       this.service.cadastrar(this.foto)
       .subscribe(
-        response => { 
-          this.mensagem.textoMsg = `Foto ${this.foto.titulo} salva com sucesso!!!`;
-          this.mensagem.tipo='success';
+        mensagemApi => { 
+          this.mensagem = mensagemApi;
           this.foto = new FotoComponent();
         },
         erro => {
-          this.mensagem.textoMsg = `Ocorreu um erro ao salvar a foto ${this.foto.titulo}`;
+          this.mensagem.textoMsg = `Ocorreu um erro ${erro}`;
           this.mensagem.tipo='danger';
         }
       );

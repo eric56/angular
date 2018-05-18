@@ -3,7 +3,7 @@
 </header>
 
 <section class="container">
-
+    <app-mensagem *ngIf="mensagem.textoMsg" [tipo]='mensagem.tipo' [textoMsg]='mensagem.textoMsg'></app-mensagem>
     <div class="row">
         <form class="col-md-12">
                 <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
