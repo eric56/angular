@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FotoService } from '../servicos/foto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensagemComponent } from '../mensagem/mensagem.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,10 +15,20 @@ export class CadastroComponent implements OnInit {
   
   foto = new FotoComponent();
   mensagem = new MensagemComponent();
+  formCadastro: FormGroup;
 
   constructor(  private service: FotoService, 
                 private rota: ActivatedRoute,
-                private router: Router) { }
+                private router: Router,
+                private formBuilder: FormBuilder) { 
+
+                  this.formCadastro = formBuilder.group({
+                    titulo: ['', Validators.compose([Validators.required, Validators.minLength(10)])],
+                    url: ['', Validators.required],
+                    descricao: ''
+                  }) 
+
+                }
 
   ngOnInit() {
     this.rota.params.subscribe(parametro => {

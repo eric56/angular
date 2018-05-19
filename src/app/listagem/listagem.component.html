@@ -4,14 +4,20 @@
 
 <section class="container">
     <app-mensagem *ngIf="mensagem.textoMsg" [tipo]='mensagem.tipo' [textoMsg]='mensagem.textoMsg'></app-mensagem>
-    <div class="row">
-        <form class="col-md-12">
-                <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
-        </form>
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <form class="input-group">
+                <span class="input-group-prepend">
+                    <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+                </span>
+                <input (keyup)="true" #inputBusca type="search" class="form-control">
+            </form>
+        </div>
     </div>
 
     <div class="row">
-        <painel *ngFor="let picture of listPictures" tituloPainel={{picture.titulo}} class="col-md-4">
+        <painel *ngFor="let picture of listPictures | filtroPorTitulo : inputBusca.value" tituloPainel={{picture.titulo}} class="col-md-4">
                 <a [routerLink]="['/cadastro', picture._id]" data-foto>
                     <foto url="{{picture.url}}" titulo = "{{picture.titulo}}"> </foto>
                 </a>

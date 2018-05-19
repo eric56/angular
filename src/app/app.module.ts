@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { FotoModule } from './foto/foto.module';
@@ -12,6 +12,7 @@ import { ModuloRoteador } from "./app.routes";
 import { Error404Component } from './error404/error404.component';
 import { FotoService } from './servicos/foto.service';
 import { MensagemComponent } from './mensagem/mensagem.component';
+import { FiltroPorTitulo } from "./listagem/lista.pipe";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     ListagemComponent,
     CadastroComponent,
     Error404Component,
-    MensagemComponent
+    MensagemComponent,
+    FiltroPorTitulo
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     PainelModule,
     HttpClientModule,
     ModuloRoteador,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     FotoService
